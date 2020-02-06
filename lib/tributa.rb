@@ -1,6 +1,10 @@
+require "tributa/loader"
 require "tributa/version"
 
 module Tributa
   class Error < StandardError; end
-  # Your code goes here...
+
+  def self.load
+    Tributa::Loader.call
+  end
 end
