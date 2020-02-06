@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tributa (0.1.1)
+    tributa (0.1.2)
       nokogiri
 
 GEM
