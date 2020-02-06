@@ -1,3 +1,5 @@
+require 'json'
+
 module Tributa
   class Table
     attr_reader :rows
@@ -12,6 +14,16 @@ module Tributa
           row.community == community &&
           row.year == year.to_s
       end
+    end
+
+    def as_json
+      {
+        rows: rows.map(&:as_json)
+      }
+    end
+
+    def to_json
+      as_json.to_json
     end
   end
 end
