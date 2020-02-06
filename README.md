@@ -14,15 +14,50 @@ gem 'tributa'
 
 And then execute:
 
-    $ bundle install
+```shell
+bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install tributa
+```shell
+gem install tributa
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+The gem tries to fetch data from [ESTV](http://www.estv2.admin.ch/steuerfuss/my_select_alle.php) and prepare it as a table structure.
+
+Example:
+
+```ruby
+data = Tributa.load
+row42 = data.rows[42]
+ => #<Tributa::Table::Row:0x00007f7f2f165070 @canton="SG", @year="2013", @community="Abtwil", @canton_rate="115.00", @community_rate="115.0000", @reformed_rate="21.0000", @catholic_rate="21.0000">
+```
+
+A `Tributa::Table::Row` has these attributes
+
+```ruby
+row42.canton            # => "SG"
+row42.year              # => "2013"
+row42.community         # => "Abtwil"
+row42.canton_rate       # => "115.00"
+row42.community_rate    # => "115.0000"
+row42.reformed_rate     # => "21.0000"
+row42.catholic_rate     # => "21.0000"
+```
+
+A `Tributa::Table` can be queried
+
+```ruby
+data.find_all_by(canton: 'TG', year: 2018, community: 'Frauenfeld')
+ => [#<Tributa::Table::Row:0x00007f94c83704d8 @canton="TG", @year="2018", @community="Frauenfeld", @canton_rate="117.00", @community_rate="146.0000", @reformed_rate="16.0000", @catholic_rate="16.0000">]
+```
+
+### TODO
+
+* [ ] Make `Tributa::Table#find_all_by` work with any arguments
 
 ## Development
 
